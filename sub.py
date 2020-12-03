@@ -10,6 +10,9 @@ from time import sleep
 from random import randint
 from datetime import datetime
 
+# 忽略网站的证书错误，这很不安全 :(
+verify_cert = False
+
 user = "USERNAME"  # sep账号
 passwd = "PASSWORD"  # sep密码
 api_key = "API_KEY"  # server酱的api，填了可以微信通知打卡结果，不填没影响
@@ -124,6 +127,7 @@ def message(key, title, body):
 
 def report(username, password):
     s = requests.Session()
+    s.verify = verify_cert  # 不验证证书
     header = {
         "User-Agent": "Mozilla/5.0 (Linux; Android 10;  AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/66.0.3359.126 MQQBrowser/6.2 TBS/045136 Mobile Safari/537.36 wxwork/3.0.16 MicroMessenger/7.0.1 NetType/WIFI Language/zh"
     }
